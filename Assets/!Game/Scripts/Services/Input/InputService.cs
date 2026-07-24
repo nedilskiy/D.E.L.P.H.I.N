@@ -15,6 +15,8 @@ namespace Delphin.Services
         private InputAction jumpAction;
         private InputAction interactAction;
         private InputAction inventoryAction;
+        private InputAction attackAction;
+        private InputAction cancelAction;
 
         public InputActionAsset Actions => actions;
         public Vector2 MoveInput { get; private set; }
@@ -25,6 +27,8 @@ namespace Delphin.Services
         public event Action JumpPerformed;
         public event Action InteractPerformed;
         public event Action InventoryTogglePerformed;
+        public event Action AttackPerformed;
+        public event Action CancelPerformed;
 
         public InputService(InputActionAsset actions)
         {
@@ -42,6 +46,8 @@ namespace Delphin.Services
             jumpAction = playerMap.FindAction("Jump", throwIfNotFound: true);
             interactAction = playerMap.FindAction("Interact", throwIfNotFound: true);
             inventoryAction = playerMap.FindAction("Inventory", throwIfNotFound: true);
+            attackAction = playerMap.FindAction("Attack", throwIfNotFound: true);
+            cancelAction = playerMap.FindAction("Cancel", throwIfNotFound: true);
 
             moveAction.performed += ctx => MoveInput = ctx.ReadValue<Vector2>();
             moveAction.canceled += _ => MoveInput = Vector2.zero;
@@ -58,6 +64,8 @@ namespace Delphin.Services
             jumpAction.performed += _ => JumpPerformed?.Invoke();
             interactAction.performed += _ => InteractPerformed?.Invoke();
             inventoryAction.performed += _ => InventoryTogglePerformed?.Invoke();
+            attackAction.performed += _ => AttackPerformed?.Invoke();
+            cancelAction.performed += _ => CancelPerformed?.Invoke();
 
             Enable();
         }
@@ -85,6 +93,8 @@ namespace Delphin.Services
             JumpPerformed = null;
             InteractPerformed = null;
             InventoryTogglePerformed = null;
+            AttackPerformed = null;
+            CancelPerformed = null;
         }
     }
 }

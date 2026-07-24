@@ -16,12 +16,14 @@ namespace Delphin.UI
 
         private IInputService input;
         private IInventoryService inventory;
+        private IGameStateService gameState;
         private bool isOpen;
 
         private void Start()
         {
             input = ServiceLocator.Get<IInputService>();
             inventory = ServiceLocator.Get<IInventoryService>();
+            gameState = ServiceLocator.Get<IGameStateService>();
 
             input.InventoryTogglePerformed += Toggle;
             inventory.ItemsChanged += Refresh;
@@ -40,6 +42,9 @@ namespace Delphin.UI
 
         private void Toggle()
         {
+            if (!isOpen && gameState.CurrentState != GameState.Playing)
+                return;
+
             SetOpen(!isOpen);
         }
 
@@ -50,6 +55,7 @@ namespace Delphin.UI
 
             Cursor.lockState = open ? CursorLockMode.None : CursorLockMode.Locked;
             Cursor.visible = open;
+            gameState.SetState(open ? GameState.Paused : GameState.Playing);
 
             if (open)
                 Refresh();

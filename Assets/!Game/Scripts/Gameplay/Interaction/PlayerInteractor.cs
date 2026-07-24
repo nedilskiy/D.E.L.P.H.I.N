@@ -26,12 +26,16 @@ namespace Delphin.Gameplay
         {
             input = ServiceLocator.Get<IInputService>();
             input.InteractPerformed += OnInteractPerformed;
+            input.AttackPerformed += OnAttackPerformed;
         }
 
         private void OnDestroy()
         {
             if (input != null)
+            {
                 input.InteractPerformed -= OnInteractPerformed;
+                input.AttackPerformed -= OnAttackPerformed;
+            }
         }
 
         private void Update()
@@ -56,6 +60,11 @@ namespace Delphin.Gameplay
         private void OnInteractPerformed()
         {
             focused?.Interact(gameObject);
+        }
+
+        private void OnAttackPerformed()
+        {
+            focused?.SecondaryInteract(gameObject);
         }
     }
 }

@@ -21,5 +21,9 @@ namespace Delphin.Gameplay
             consumed = true;
             onPressed?.Invoke();
         }
+
+        public void SecondaryInteract(GameObject interactor)
+        {
+        }
     }
 }

@@ -53,7 +53,7 @@ namespace Delphin.Core
 
         private void OnFirstSceneLoaded()
         {
-            ServiceLocator.Get<IGameStateService>().SetState(GameState.MainMenu);
+            ServiceLocator.Get<IGameStateService>().SetState(GameState.Playing);
         }
     }
 }

@@ -18,5 +18,9 @@ namespace Delphin.Gameplay
             onPickedUp?.Invoke(interactor);
             gameObject.SetActive(false);
         }
+
+        public void SecondaryInteract(GameObject interactor)
+        {
+        }
     }
 }

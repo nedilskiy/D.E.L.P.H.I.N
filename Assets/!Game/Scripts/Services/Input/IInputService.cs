@@ -16,6 +16,8 @@ namespace Delphin.Services
         event Action JumpPerformed;
         event Action InteractPerformed;
         event Action InventoryTogglePerformed;
+        event Action AttackPerformed;
+        event Action CancelPerformed;
 
         void SwitchActionMap(string mapName);
         void Enable();

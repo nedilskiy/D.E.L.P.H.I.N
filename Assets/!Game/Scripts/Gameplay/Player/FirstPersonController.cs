@@ -21,6 +21,7 @@ namespace Delphin.Gameplay
 
         private CharacterController controller;
         private IInputService input;
+        private IGameStateService gameState;
         private Vector3 velocity;
         private float pitch;
 
@@ -32,6 +33,7 @@ namespace Delphin.Gameplay
         private void Start()
         {
             input = ServiceLocator.Get<IInputService>();
+            gameState = ServiceLocator.Get<IGameStateService>();
             input.JumpPerformed += OnJumpPerformed;
 
             Cursor.lockState = CursorLockMode.Locked;
@@ -46,7 +48,7 @@ namespace Delphin.Gameplay
 
         private void Update()
         {
-            if (Cursor.lockState != CursorLockMode.Locked)
+            if (gameState.CurrentState != GameState.Playing)
                 return;
 
             Look();

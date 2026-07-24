@@ -6,5 +6,6 @@ namespace Delphin.Gameplay
     {
         string InteractionPrompt { get; }
         void Interact(GameObject interactor);
+        void SecondaryInteract(GameObject interactor);
     }
 }
