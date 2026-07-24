@@ -23,6 +23,14 @@ namespace Delphin.Services
             ItemsChanged?.Invoke();
         }
 
+        public void RemoveItem(ItemDefinition item)
+        {
+            if (item == null || !items.Remove(item))
+                return;
+
+            ItemsChanged?.Invoke();
+        }
+
         public void Shutdown()
         {
             items.Clear();

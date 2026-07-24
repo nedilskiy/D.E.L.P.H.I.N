@@ -25,7 +25,7 @@ namespace Delphin.UI
 
         private void OnFocusChanged(IInteractable interactable)
         {
-            if (interactable == null)
+            if (interactable == null || string.IsNullOrEmpty(interactable.InteractionPrompt))
             {
                 SetVisible(false);
                 return;

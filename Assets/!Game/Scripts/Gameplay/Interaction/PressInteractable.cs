@@ -13,7 +13,7 @@ namespace Delphin.Gameplay
 
         public string InteractionPrompt => label;
 
-        public void Interact(GameObject interactor)
+        public void PrimaryInteract(GameObject interactor)
         {
             if (oneShot && consumed)
                 return;

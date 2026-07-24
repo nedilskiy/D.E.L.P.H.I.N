@@ -39,11 +39,7 @@ namespace Delphin.Gameplay
                 input.CancelPerformed -= OnCancelPerformed;
         }
 
-        public void Interact(GameObject interactor)
-        {
-        }
-
-        public void SecondaryInteract(GameObject interactor)
+        public void PrimaryInteract(GameObject interactor)
         {
             switch (state)
             {
@@ -55,6 +51,10 @@ namespace Delphin.Gameplay
                     OpenDocument();
                     break;
             }
+        }
+
+        public void SecondaryInteract(GameObject interactor)
+        {
         }
 
         private void BeginFocus(GameObject interactor)

@@ -25,16 +25,16 @@ namespace Delphin.Gameplay
         private void Start()
         {
             input = ServiceLocator.Get<IInputService>();
-            input.InteractPerformed += OnInteractPerformed;
-            input.AttackPerformed += OnAttackPerformed;
+            input.AttackPerformed += OnPrimaryPerformed;
+            input.CancelPerformed += OnSecondaryPerformed;
         }
 
         private void OnDestroy()
         {
             if (input != null)
             {
-                input.InteractPerformed -= OnInteractPerformed;
-                input.AttackPerformed -= OnAttackPerformed;
+                input.AttackPerformed -= OnPrimaryPerformed;
+                input.CancelPerformed -= OnSecondaryPerformed;
             }
         }
 
@@ -57,13 +57,19 @@ namespace Delphin.Gameplay
             FocusChanged?.Invoke(focused);
         }
 
-        private void OnInteractPerformed()
+        private void OnPrimaryPerformed()
         {
-            focused?.Interact(gameObject);
+            if (Cursor.lockState != CursorLockMode.Locked)
+                return;
+
+            focused?.PrimaryInteract(gameObject);
         }
 
-        private void OnAttackPerformed()
+        private void OnSecondaryPerformed()
         {
+            if (Cursor.lockState != CursorLockMode.Locked)
+                return;
+
             focused?.SecondaryInteract(gameObject);
         }
     }

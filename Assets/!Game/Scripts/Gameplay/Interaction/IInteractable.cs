@@ -5,7 +5,7 @@ namespace Delphin.Gameplay
     public interface IInteractable
     {
         string InteractionPrompt { get; }
-        void Interact(GameObject interactor);
+        void PrimaryInteract(GameObject interactor);
         void SecondaryInteract(GameObject interactor);
     }
 }

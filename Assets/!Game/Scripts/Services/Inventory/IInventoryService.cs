@@ -9,5 +9,6 @@ namespace Delphin.Services
         IReadOnlyList<ItemDefinition> Items { get; }
         event Action ItemsChanged;
         void AddItem(ItemDefinition item);
+        void RemoveItem(ItemDefinition item);
     }
 }

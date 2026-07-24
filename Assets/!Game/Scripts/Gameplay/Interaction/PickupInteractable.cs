@@ -12,7 +12,7 @@ namespace Delphin.Gameplay
 
         public string InteractionPrompt => $"Поднять: {item.ItemName}";
 
-        public void Interact(GameObject interactor)
+        public void PrimaryInteract(GameObject interactor)
         {
             ServiceLocator.Get<IInventoryService>().AddItem(item);
             onPickedUp?.Invoke(interactor);

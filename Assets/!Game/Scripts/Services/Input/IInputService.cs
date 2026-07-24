@@ -14,9 +14,9 @@ namespace Delphin.Services
         bool CrouchHeld { get; }
 
         event Action JumpPerformed;
-        event Action InteractPerformed;
         event Action InventoryTogglePerformed;
         event Action AttackPerformed;
+        event Action AttackCanceled;
         event Action CancelPerformed;
 
         void SwitchActionMap(string mapName);
