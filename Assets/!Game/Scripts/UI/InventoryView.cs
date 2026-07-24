@@ -86,6 +86,8 @@ namespace Delphin.UI
 
             if (detailsRoot != null)
                 detailsRoot.SetActive(true);
+
+            ServiceLocator.Get<IEquipmentService>().Equip(item);
         }
     }
 }

@@ -8,9 +8,11 @@ namespace Delphin.Services
         [SerializeField] private string itemName;
         [SerializeField] private Sprite icon;
         [SerializeField, TextArea] private string description;
+        [SerializeField] private GameObject worldModel;
 
         public string ItemName => itemName;
         public Sprite Icon => icon;
         public string Description => description;
+        public GameObject WorldModel => worldModel;
     }
 }

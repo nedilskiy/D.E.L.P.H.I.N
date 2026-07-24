@@ -43,6 +43,7 @@ namespace Delphin.Core
             RegisterService<IInputService>(new InputService(inputActions));
             RegisterService<ISceneLoaderService>(new SceneLoaderService());
             RegisterService<IInventoryService>(new InventoryService());
+            RegisterService<IEquipmentService>(new EquipmentService());
         }
 
         private void RegisterService<TInterface>(TInterface instance) where TInterface : class, IGameService
