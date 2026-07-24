@@ -46,6 +46,9 @@ namespace Delphin.Gameplay
 
         private void Update()
         {
+            if (Cursor.lockState != CursorLockMode.Locked)
+                return;
+
             Look();
             Move();
         }

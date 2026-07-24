@@ -14,6 +14,7 @@ namespace Delphin.Services
         private InputAction crouchAction;
         private InputAction jumpAction;
         private InputAction interactAction;
+        private InputAction inventoryAction;
 
         public InputActionAsset Actions => actions;
         public Vector2 MoveInput { get; private set; }
@@ -23,6 +24,7 @@ namespace Delphin.Services
 
         public event Action JumpPerformed;
         public event Action InteractPerformed;
+        public event Action InventoryTogglePerformed;
 
         public InputService(InputActionAsset actions)
         {
@@ -39,6 +41,7 @@ namespace Delphin.Services
             crouchAction = playerMap.FindAction("Crouch", throwIfNotFound: true);
             jumpAction = playerMap.FindAction("Jump", throwIfNotFound: true);
             interactAction = playerMap.FindAction("Interact", throwIfNotFound: true);
+            inventoryAction = playerMap.FindAction("Inventory", throwIfNotFound: true);
 
             moveAction.performed += ctx => MoveInput = ctx.ReadValue<Vector2>();
             moveAction.canceled += _ => MoveInput = Vector2.zero;
@@ -54,6 +57,7 @@ namespace Delphin.Services
 
             jumpAction.performed += _ => JumpPerformed?.Invoke();
             interactAction.performed += _ => InteractPerformed?.Invoke();
+            inventoryAction.performed += _ => InventoryTogglePerformed?.Invoke();
 
             Enable();
         }
@@ -80,6 +84,7 @@ namespace Delphin.Services
             actions.Disable();
             JumpPerformed = null;
             InteractPerformed = null;
+            InventoryTogglePerformed = null;
         }
     }
 }
