@@ -33,13 +33,17 @@ namespace Delphin.Gameplay
 
         private void OnLeverPulled()
         {
-            var hasKatushka = katushkaSlot != null && katushkaSlot.IsFilled;
             var hasCassette = cassetteSlot != null && cassetteSlot.IsFilled;
-            var success = hasKatushka && hasCassette;
+            if (!hasCassette)
+            {
+                SetMessage("ОТСУТСТВУЕТ НАВИГАЦИОННАЯ КАССЕТА");
+                return;
+            }
 
-            SetDisplay(success);
+            var hasKatushka = katushkaSlot != null && katushkaSlot.IsFilled;
+            SetDisplay(hasKatushka);
 
-            if (!success)
+            if (!hasKatushka)
                 return;
 
             cassetteSlot.RecordData(coordinates);
@@ -48,8 +52,7 @@ namespace Delphin.Gameplay
 
         private void OnIncompatibleCassette()
         {
-            if (display != null)
-                display.text = "НЕПОДХОДЯЩАЯ КАССЕТА";
+            SetMessage("НЕПОДХОДЯЩАЯ КАССЕТА");
         }
 
         private void SetDisplay(bool showResult)
@@ -60,6 +63,12 @@ namespace Delphin.Gameplay
             display.text = showResult
                 ? $"X: {coordinates.x:0.0}\nY: {coordinates.y:0.0}\nZ: {coordinates.z:0.0}"
                 : "X: --\nY: --\nZ: --";
+        }
+
+        private void SetMessage(string message)
+        {
+            if (display != null)
+                display.text = message;
         }
     }
 }

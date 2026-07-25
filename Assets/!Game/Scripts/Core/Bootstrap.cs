@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Delphin.Services;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +11,13 @@ namespace Delphin.Core
     {
         [SerializeField] private InputActionAsset inputActions;
         [SerializeField] private string firstSceneName = "Menu";
+        [SerializeField] private GameState firstSceneState = GameState.MainMenu;
+
+        [Header("Audio")]
+        [SerializeField] private AudioMixer audioMixer;
+        [SerializeField] private AudioMixerGroup musicMixerGroup;
+        [SerializeField] private AudioMixerGroup sfxMixerGroup;
+        [SerializeField] private AudioMixerGroup dialogueMixerGroup;
 
         private readonly List<IGameService> services = new();
 
@@ -39,7 +47,7 @@ namespace Delphin.Core
         private void RegisterServices()
         {
             RegisterService<IGameStateService>(new GameStateService());
-            RegisterService<IAudioService>(new AudioService());
+            RegisterService<IAudioService>(new AudioService(audioMixer, musicMixerGroup, sfxMixerGroup, dialogueMixerGroup));
             RegisterService<IInputService>(new InputService(inputActions));
             RegisterService<ISceneLoaderService>(new SceneLoaderService());
             RegisterService<IInventoryService>(new InventoryService());
@@ -54,7 +62,7 @@ namespace Delphin.Core
 
         private void OnFirstSceneLoaded()
         {
-            ServiceLocator.Get<IGameStateService>().SetState(GameState.Playing);
+            ServiceLocator.Get<IGameStateService>().SetState(firstSceneState);
         }
     }
 }

@@ -63,6 +63,7 @@ namespace Delphin.Gameplay
                 return;
 
             focused?.PrimaryInteract(gameObject);
+            FocusChanged?.Invoke(focused);
         }
 
         private void OnSecondaryPerformed()
@@ -71,6 +72,7 @@ namespace Delphin.Gameplay
                 return;
 
             focused?.SecondaryInteract(gameObject);
+            FocusChanged?.Invoke(focused);
         }
     }
 }

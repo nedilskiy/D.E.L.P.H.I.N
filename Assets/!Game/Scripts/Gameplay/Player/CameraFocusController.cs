@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -15,23 +16,23 @@ namespace Delphin.Gameplay
         {
             returnPosition = transform.position;
             returnRotation = transform.rotation;
-            StartLerp(target.position, target.rotation);
+            StartLerp(target.position, target.rotation, null);
         }
 
-        public void ReturnToPlayer()
+        public void ReturnToPlayer(Action onComplete = null)
         {
-            StartLerp(returnPosition, returnRotation);
+            StartLerp(returnPosition, returnRotation, onComplete);
         }
 
-        private void StartLerp(Vector3 targetPosition, Quaternion targetRotation)
+        private void StartLerp(Vector3 targetPosition, Quaternion targetRotation, Action onComplete)
         {
             if (routine != null)
                 StopCoroutine(routine);
 
-            routine = StartCoroutine(LerpRoutine(targetPosition, targetRotation));
+            routine = StartCoroutine(LerpRoutine(targetPosition, targetRotation, onComplete));
         }
 
-        private IEnumerator LerpRoutine(Vector3 targetPosition, Quaternion targetRotation)
+        private IEnumerator LerpRoutine(Vector3 targetPosition, Quaternion targetRotation, Action onComplete)
         {
             var startPosition = transform.position;
             var startRotation = transform.rotation;
@@ -49,6 +50,7 @@ namespace Delphin.Gameplay
             transform.position = targetPosition;
             transform.rotation = targetRotation;
             routine = null;
+            onComplete?.Invoke();
         }
     }
 }

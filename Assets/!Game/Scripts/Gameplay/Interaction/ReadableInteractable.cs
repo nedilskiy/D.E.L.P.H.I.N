@@ -91,8 +91,7 @@ namespace Delphin.Gameplay
                 case ReadState.Zoomed:
                     state = ReadState.Idle;
                     input.CancelPerformed -= OnCancelPerformed;
-                    cameraFocus.ReturnToPlayer();
-                    gameState.SetState(GameState.Playing);
+                    cameraFocus.ReturnToPlayer(() => gameState.SetState(GameState.Playing));
                     break;
             }
         }

@@ -164,7 +164,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  firstSceneName: Game
+  firstSceneName: Menu
+  firstSceneState: 1
+  audioMixer: {fileID: 24100000, guid: e814cfa7f1f725673883ba28aa082666, type: 2}
+  musicMixerGroup: {fileID: 6141357336497397567, guid: e814cfa7f1f725673883ba28aa082666, type: 2}
+  sfxMixerGroup: {fileID: -6538649766333402905, guid: e814cfa7f1f725673883ba28aa082666, type: 2}
+  dialogueMixerGroup: {fileID: 8599534999625079097, guid: e814cfa7f1f725673883ba28aa082666, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
